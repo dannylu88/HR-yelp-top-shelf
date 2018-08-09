@@ -1,7 +1,27 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize')
+        
+// new Sequelize (config.databasename, config.username, config.password)
+const sequelize = new Sequelize('yelp', 'dannylu8', '12345' , {
+  dialect: 'postgres'
+});
 
-mongoose.connect('mongodb://localhost/yelpBiz');
+const models = {
+  business: sequelize.import('./business')
+};
 
-const db = mongoose.connection;
-db.on('error', error => console.log(('Cannot connect to database')));
-db.once('open', () => console.log('Connected to database!'));
+//testing connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+
+
+models.sequelize = sequelize;
+models.Sequelize = Sequelize;
+
+module.export = models;

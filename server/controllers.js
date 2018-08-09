@@ -1,6 +1,6 @@
 const axios = require('axios');
 const faker = require('faker');
-const Biz = require('../database/models.js');
+const Biz = require('../database/business.js');
 const Generate = require('./randomNumberGenerators.js');
 
 const controller = {
