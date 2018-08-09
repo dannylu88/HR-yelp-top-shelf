@@ -7,12 +7,17 @@ const cors = require('cors');
 const server = express();
 const port = 3006;
 
+const models = require('../database');
+
 server.use(cors());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 server.use(parser.json());
 server.use(parser.urlencoded({ extended: true }));
 server.use('/main', router);
 
-server.listen(port, () => {
-  console.log('Successfully connected to port: ', port);
+models.sequelize.sync().then( () => {
+  server.listen(port, () => {
+    console.log('Successfully connected to port: ', port);
+  });
 });
+

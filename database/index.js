@@ -6,7 +6,7 @@ const sequelize = new Sequelize('yelp', 'dannylu8', '12345' , {
 });
 
 const models = {
-  business: sequelize.import('./business')
+  Business: sequelize.import('./business')
 };
 
 //testing connection
@@ -24,4 +24,4 @@ sequelize
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 
-module.export = models;
+module.exports = models;
