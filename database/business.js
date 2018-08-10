@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) =>{
     website:{type:DataTypes.STRING},
     email:{type:DataTypes.STRING},
     phone:{type:DataTypes.STRING}
-  });
+  }, {timestamps:false});
   return Business;
 };
 
