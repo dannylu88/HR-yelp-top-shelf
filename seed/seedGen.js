@@ -10,7 +10,7 @@ fs.writeFile('data.csv', 'restaurant, rating, price, category, street, city, sta
     if(count % 1000000 === 0) {
       let timePast = (Date.now() - startTime) / 1000 / 60  //timepast in minutes
       console.log(`creating from: ${count + 1} to ${count + 1000000} `);
-      console.log('time to create this million', timePast);
+      if(count !== 0) console.log('time to create the above million in mins', timePast);
       startTime = Date.now();
     }
     if(count  === 10000000) return; 
