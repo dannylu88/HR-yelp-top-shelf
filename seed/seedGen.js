@@ -4,12 +4,14 @@ const fs = require('fs');
 fs.writeFile('data.csv', 'restaurant, rating, price, category, street, city, state, zip, country, website, email, phone', (err) => {  
   if (err) throw err;
   console.log('Header created!');
+  let startTime = Date.now()
   let recurseSeeding = (count = 0) => {
-    let startTime = Date.now()
+    
     if(count % 1000000 === 0) {
       let timePast = (Date.now() - startTime) / 1000 / 60  //timepast in minutes
-      console.log('creating:', count + 1);
-      console.log('time', timePast);
+      console.log(`creating from: ${count + 1} to ${count + 1000000} `);
+      console.log('time to create this million', timePast);
+      startTime = Date.now();
     }
     if(count  === 10000000) return; 
       let restaurant = faker.lorem.words(3);
