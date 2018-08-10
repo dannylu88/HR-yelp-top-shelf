@@ -5,7 +5,12 @@ fs.writeFile('data.csv', 'restaurant, rating, price, category, street, city, sta
   if (err) throw err;
   console.log('Header created!');
   let recurseSeeding = (count = 0) => {
-    if(count % 1000000 === 0) console.log('creating:', count + 1)
+    let startTime = Date.now()
+    if(count % 1000000 === 0) {
+      let timePast = (Date.now() - startTime) / 1000 / 60  //timepast in minutes
+      console.log('creating:', count + 1);
+      console.log('time', timePast);
+    }
     if(count  === 10000000) return; 
       let restaurant = faker.lorem.words(3);
       let rating = faker.random.number(5);
