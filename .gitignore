@@ -8,7 +8,7 @@ yarn-error.log*
 #ignore image folder & nodemon.json
 nodemon.json
 Img/
-*.csv
+data.csv
 
 # Runtime data
 pids
