@@ -5,6 +5,8 @@ const write = fs.createWriteStream('./data-faster.csv');
 function seedData(writer, encoding, callback) {
   let i = 0;
   let max = 10000000;
+  let startingTime = Date.now() / 1000 / 60;
+
   function write() {
     let ok = true;
     while (i < max && ok) {
@@ -22,7 +24,12 @@ function seedData(writer, encoding, callback) {
       let phone = faker.phone.phoneNumber();
       const model = [restaurant, rating, price, category, street, city, state, zip, country, website, email, phone];
       i += 1;
-      if (i % 100000 === 0) { console.log(i); }
+      
+      if (i % 1000000 === 0 && i !== 0) { 
+        let timeCollasped = (Date.now() / 1000 / 60) - startingTime;
+        console.log(`starting from ${i} to ${i+1000000}`)
+        console.log(`total time used in minutes: ${timeCollasped}`)
+      }
       if (i === max) {
         writer.write(`${model.join(',')}`, encoding, callback);
       } else {
