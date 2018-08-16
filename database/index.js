@@ -1,27 +1,28 @@
-const Sequelize = require('sequelize')
-        
-// new Sequelize (config.databasename, config.username, config.password)
-const sequelize = new Sequelize('yelp', 'dannylu8', '12345' , {
-  dialect: 'postgres'
-});
+var models = require('express-cassandra');
 
-const models = {
-  Business: sequelize.import('./business')
-};
+//Tell express-cassandra to use the models-directory, and
+//use bind() to load the models using cassandra configurations.
+models.setDirectory( __dirname + '/database').bind(
+    {
+        clientOptions: {
+            contactPoints: ['127.0.0.1'],
+            protocolOptions: { port: 9042 },
+            keyspace: 'yelp',
+            queryOptions: {consistency: models.consistencies.one}
+        },
+        ormOptions: {
+            defaultReplicationStrategy : {
+                class: 'SimpleStrategy',
+                replication_factor: 1
+            },
+            migration: 'safe'
+        }
+    },
+    function(err) {
+        if(err) throw err;
 
-//testing connection
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-
-
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
-
-module.exports = models;
+        // You'll now have a `person` table in cassandra created against the model
+        // schema you've defined earlier and you can now access the model instance
+        // in `models.instance.Person` object containing supported orm operations.
+    }
+);
