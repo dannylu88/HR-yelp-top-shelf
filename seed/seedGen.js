@@ -25,7 +25,7 @@ function seedData(writer, encoding, callback) {
       const model = [restaurant, rating, price, category, street, city, state, zip, country, website, email, phone];
       i += 1;
       
-      if (i % 1000000 === 0 && i !== 0) { 
+      if (i % 1000000 === 0) { 
         let timeCollasped = (Date.now() / 1000 / 60) - startingTime;
         console.log(`starting from ${i} to ${i+1000000}`)
         console.log(`total time used in minutes: ${timeCollasped}`)
