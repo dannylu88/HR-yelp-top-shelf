@@ -1,6 +1,6 @@
 const faker = require('faker');
 const fs = require('fs');
-const write = fs.createWriteStream('./data-faster.csv');
+const write = fs.createWriteStream('./data-cass.csv');
 
 function seedData(writer, encoding, callback) {
   let i = 0;
@@ -10,6 +10,7 @@ function seedData(writer, encoding, callback) {
   function write() {
     let ok = true;
     while (i < max && ok) {
+      let id = i;
       let restaurant = faker.lorem.words(3);
       let rating = faker.random.number(5);
       let price = faker.random.number(4);
@@ -35,7 +36,7 @@ function seedData(writer, encoding, callback) {
       } else {
         if(i === 1) {
           console.log('writting header')
-          const header = ['restaurant', 'rating', 'price', 'category', 'street', 'city', 'state', 'zip','country','website','email','phone'];
+          const header = ['id','restaurant', 'rating', 'price', 'category', 'street', 'city', 'state', 'zip','country','website','email','phone'];
           ok = writer.write(`${header.join(',')}\n`, encoding);
         }
         ok = writer.write(`${model.join(',')}\n`, encoding);

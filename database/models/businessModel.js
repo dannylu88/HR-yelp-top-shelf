@@ -15,11 +15,7 @@ module.exports = {
     country:'varchar',
     website:'varchar',
     email:'varchar',
-    phone:'varchar',
-    created: {
-      type:'timestamp',
-      default:{'$db_function': 'toTimestamp(now())'}
-    }
+    phone:'varchar'
   },
-  key: [['id'], 'created']
+  key: [['id']]
 }
