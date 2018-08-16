@@ -15,9 +15,9 @@ server.use(parser.json());
 server.use(parser.urlencoded({ extended: true }));
 server.use('/main', router);
 
-models.sequelize.sync().then( () => {
+// models.sequelize.sync().then( () => {
   server.listen(port, () => {
     console.log('Successfully connected to port: ', port);
   });
-});
+//});
 

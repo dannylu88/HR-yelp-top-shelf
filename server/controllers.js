@@ -1,12 +1,12 @@
 const axios = require('axios');
 const faker = require('faker');
-const Biz = require('../database/business.js');
+const Biz = require('../database/models/businessModel.js');
+const cass = require('../database/');
 const Generate = require('./randomNumberGenerators.js');
 
 const controller = {
   get: (req, res) => {
     console.log('controller.get was called!');
-
     let business_name = req.query.name;
 
     Biz.find({ name: business_name }, (error, business) => {
@@ -20,6 +20,7 @@ const controller = {
   },
   post: (req, res) => {
     console.log('controller.post was called!');
+    new cass.instance.business().save();
   },
   postFakerData: (req ,res) => {
     console.log('controller.postFakerData was called!');
