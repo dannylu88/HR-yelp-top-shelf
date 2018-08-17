@@ -8,8 +8,7 @@ const Generate = require('./randomNumberGenerators.js');
 
 const controller = {
   getRestaurant:(request, response) =>{
-    console.log('HI!!!!!!!!!!!!!!!!!!');
-    console.log('BYE!!!!!!!!!!!!!!!!!!', request.params.restaurant);
+   
     Biz.findOne({
       where:{
         restaurant: request.params.restaurant
