@@ -1,16 +1,12 @@
 const Sequelize = require('sequelize')
         
 // new Sequelize (config.databasename, config.username, config.password)
-const sequelize = new Sequelize('yelp', 'dannylu8', '12345' , {
+const connection = new Sequelize('yelp', 'dannylu8', '12345' , {
   dialect: 'postgres'
 });
 
-const models = {
-  Business: sequelize.import('./business')
-};
-
 //testing connection
-sequelize
+connection
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
@@ -19,9 +15,4 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-
-
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
-
-module.exports = models;
+module.exports = connection;

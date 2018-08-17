@@ -1,20 +1,27 @@
+// const connection = require('./index');
+const Sequelize = require('sequelize');
+const connection = require('./');
 
-module.exports = (sequelize, DataTypes) =>{
-  const Business = sequelize.define('business', {
-    restaurant: {type:DataTypes.STRING},
-    rating:{type: DataTypes.INTEGER},
-    price: {type: DataTypes.STRING},
-    category:{type:DataTypes.STRING},
-      street:{type:DataTypes.STRING},
-      city:{type:DataTypes.STRING},
-      state:{type:DataTypes.STRING},
-      zip:{type:DataTypes.STRING},
-      country:{type:DataTypes.STRING},
-  
-    website:{type:DataTypes.STRING},
-    email:{type:DataTypes.STRING},
-    phone:{type:DataTypes.STRING}
+const Business = connection.define('business', {
+    restaurant: {type: Sequelize.DataTypes.STRING},
+    rating:{type: Sequelize.DataTypes.INTEGER},
+    price: {type: Sequelize.DataTypes.STRING},
+    category:{type: Sequelize.DataTypes.STRING},
+    street:{type: Sequelize.DataTypes.STRING},
+    city:{type: Sequelize.DataTypes.STRING},
+    state:{type: Sequelize.DataTypes.STRING},
+    zip:{type: Sequelize.DataTypes.STRING},
+    country:{type: Sequelize.DataTypes.STRING},
+    website:{type: Sequelize.DataTypes.STRING},
+    email:{type: Sequelize.DataTypes.STRING},
+    phone:{type: Sequelize.DataTypes.STRING}
   }, {timestamps:false});
-  return Business;
-};
 
+  connection.sync({force: false}).then(() => {
+    console.log('Postgres tables created!');
+  })
+  .catch( error=> {
+    console.error('Error creating postgres tables', error);
+  });
+
+  module.exports = { Business };
