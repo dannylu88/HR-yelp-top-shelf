@@ -14497,19 +14497,19 @@ function ContentDisplayHeader(props) {
             _react2.default.createElement(
               Keyword,
               null,
-              'Japanese'
+              props.category
             ),
             ',',
             _react2.default.createElement(
               Keyword,
               null,
-              'Tapas/Small Plates'
+              props.category
             ),
             ',',
             _react2.default.createElement(
               Keyword,
               null,
-              'Pubs'
+              props.category
             )
           ),
           _react2.default.createElement(

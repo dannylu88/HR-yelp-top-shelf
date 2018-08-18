@@ -292,9 +292,9 @@ function ContentDisplayHeader(props) {
             </span>
             <Dot>.</Dot>
             <span className="biz-keywords">
-              <Keyword>Japanese</Keyword>,
-              <Keyword>Tapas/Small Plates</Keyword>,
-              <Keyword>Pubs</Keyword>
+              <Keyword>{props.category}</Keyword>,
+              <Keyword>{props.category}</Keyword>,
+              <Keyword>{props.category}</Keyword>
             </span>
             <Chiclet className="edit-chiclet">
               <EditIcon src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/pencil-edit-button.png"/>
