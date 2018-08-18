@@ -45,25 +45,27 @@ class TopShelf extends React.Component {
   }
 
   DataGen() {
-    axios.post('/main/fakeData')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(error => console.log(error));
+    // axios.post('/main/fakeData')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => console.log(error));
   }
 
   FetchBusinessData() {
     //here is where to get data from db
-    axios.get('http://ec2-54-153-70-61.us-west-1.compute.amazonaws.com/main/biz', {
-        params: {
-          name: 'Jacobson, Jaskolski and Kreiger'
-        }
-      })
+    axios.get('/main/biz/voluptatem porro facere')
       .then((response) => {
-
-        if (response.data.length) {
-
-          let biz = response.data[0];
+        console.log(response.data)
+        if (response.data) {
+          let biz = response.data;
+          let address = {
+            street: biz.street,
+            zip: biz.zip,
+            state: biz.state,
+            city: biz.city,
+            country: biz.country
+          }
 
           this.setState({
             businessInfo: {
@@ -75,16 +77,12 @@ class TopShelf extends React.Component {
               review_count: biz.review_count,
               price: biz.price,
               category: biz.category,
-              address: biz.address,
+              address: address,
               website: biz.website,
               email: biz.email,
               phone: biz.phone
             }
           });
-        }
-        else {
-          this.DataGen();
-          this.FetchBusinessData();
         }
       })
       .catch(error => console.log(error));
