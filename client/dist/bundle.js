@@ -13351,6 +13351,7 @@ var BizPageMainHeader = function (_React$Component) {
       this.setState({
         findInput: e.target.value
       });
+      console.log(this.state.findInput);
     }
   }, {
     key: 'handleNearInputChange',
@@ -13362,13 +13363,16 @@ var BizPageMainHeader = function (_React$Component) {
   }, {
     key: 'handleSearchBizSubmit',
     value: function handleSearchBizSubmit(e) {
-      console.log('handleSearchBizSubmit was called!');
-      e.preventDefault();
+      // console.log('handleSearchBizSubmit was called!');
+      this.props.searchChange(this.state.findInput, this.state.nearInput);
+      // e.preventDefault();
+      // console.log(this.state.findInput)
+      // console.log(this.state.nearInput)
     }
   }, {
     key: 'navHighlighter',
     value: function navHighlighter(e) {
-      console.log(e.target);
+      // console.log(e.target);
     }
   }, {
     key: 'render',
@@ -15046,7 +15050,7 @@ function BPMH_SearchBar(props) {
             { className: 'find-title' },
             'Find'
           ),
-          _react2.default.createElement(Input, { name: 'find-input', placeholder: 'auto repair, burgers, spas...' })
+          _react2.default.createElement(Input, { name: 'find-input', placeholder: 'auto repair, burgers, spas...', onChange: props.findInputChange })
         ),
         _react2.default.createElement(
           NearBarWrapper,
@@ -15056,27 +15060,33 @@ function BPMH_SearchBar(props) {
             { className: 'near-title' },
             'Near'
           ),
-          _react2.default.createElement(Input, { name: 'near-input', placeholder: 'Current Location' })
+          _react2.default.createElement(Input, { name: 'near-input', placeholder: 'Current Location', onChange: props.nearInputChange })
         ),
         _react2.default.createElement(
           SearchButton,
-          { className: 'navButton', type: 'submit', form: 'searchBarForm' },
+          { className: 'navButton', type: 'submit', form: 'searchBarForm', onClick: props.searchBarSubmit },
           _react2.default.createElement(SearchButtonIcon, { src: 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/searchIcon.png' })
         )
       ),
       _react2.default.createElement(
         SearchBarNavIconWrapper,
-        { className: 'navButton', href: '#', onMouseEnter: props.navHighlighter },
+        { className: 'navButton', href: '#', onMouseEnter: function onMouseEnter() {
+            return props.navHighlighter;
+          } },
         _react2.default.createElement(SearchBarNavIcon, { src: 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/yelpMsg.png' })
       ),
       _react2.default.createElement(
         SearchBarNavIconWrapper,
-        { className: 'navButton', href: '#', onMouseEnter: props.navHighlighter },
+        { className: 'navButton', href: '#', onMouseEnter: function onMouseEnter() {
+            return props.navHighlighter;
+          } },
         _react2.default.createElement(SearchBarNavIcon, { src: 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/yelpBell.png' })
       ),
       _react2.default.createElement(
         ProfileButton,
-        { className: 'navButton', href: '#', onMouseEnter: props.navHighlighter },
+        { className: 'navButton', href: '#', onMouseEnter: function onMouseEnter() {
+            return props.navHighlighter;
+          } },
         _react2.default.createElement(ProfileButtonPhoto, { src: 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/28488545.jpeg' }),
         _react2.default.createElement(
           DownArrowWrapper,
@@ -15148,13 +15158,16 @@ var TopShelf = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (TopShelf.__proto__ || Object.getPrototypeOf(TopShelf)).call(this, props));
 
     _this.state = {
+      findInfo: {
+        findInput: '',
+        nearInput: ''
+      },
       businessInfo: {
         id: '',
-        alias: '',
         name: '',
-        claimed: false,
+        claimed: true,
         rating: 0,
-        review_count: 0,
+        review_count: 2,
         price: 0,
         category: '',
         address: {},
@@ -15163,7 +15176,7 @@ var TopShelf = function (_React$Component) {
         phone: ''
       }
     };
-
+    _this.FindSearchChange = _this.FindSearchChange.bind(_this);
     _this.DataGen = _this.DataGen.bind(_this);
     return _this;
   }
@@ -15176,23 +15189,18 @@ var TopShelf = function (_React$Component) {
     }
   }, {
     key: 'FindSearchChange',
-    value: function FindSearchChange(e) {}
-  }, {
-    key: 'DataGen',
-    value: function DataGen() {
-      // axios.post('/main/fakeData')
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch(error => console.log(error));
-    }
-  }, {
-    key: 'FetchBusinessData',
-    value: function FetchBusinessData() {
+    value: function FindSearchChange(findInput, nearInput) {
       var _this2 = this;
 
-      //here is where to get data from db
-      axios.get('/main/biz/voluptatem porro facere').then(function (response) {
+      console.log('search changes');
+      console.log('state:', this.state);
+      this.setState({
+        findInfo: {
+          findInput: findInput,
+          nearInput: nearInput
+        }
+      });
+      axios.get('/main/biz/' + findInput + '/' + nearInput).then(function (response) {
         console.log(response.data);
         if (response.data) {
           var biz = response.data;
@@ -15207,8 +15215,54 @@ var TopShelf = function (_React$Component) {
           _this2.setState({
             businessInfo: {
               id: biz.id,
-              alias: biz.alias,
-              name: biz.name,
+              name: biz.restaurant,
+              claimed: biz.claimed,
+              rating: biz.rating,
+              review_count: biz.review_count,
+              price: biz.price,
+              category: biz.category,
+              address: address,
+              website: biz.website,
+              email: biz.email,
+              phone: biz.phone
+            }
+          });
+        }
+      }).catch(function (error) {
+        return console.log(error);
+      });
+    }
+  }, {
+    key: 'DataGen',
+    value: function DataGen() {
+      // axios.post('/main/fakeData')
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch(error => console.log(error));
+    }
+  }, {
+    key: 'FetchBusinessData',
+    value: function FetchBusinessData() {
+      var _this3 = this;
+
+      //here is where to get data from db
+      axios.get('/main/biz/voluptatem porro facere').then(function (response) {
+        console.log(response.data);
+        if (response.data) {
+          var biz = response.data;
+          var address = {
+            street: biz.street,
+            zip: biz.zip,
+            state: biz.state,
+            city: biz.city,
+            country: biz.country
+          };
+
+          _this3.setState({
+            businessInfo: {
+              id: biz.id,
+              name: biz.restaurant,
               claimed: biz.claimed,
               rating: biz.rating,
               review_count: biz.review_count,
@@ -15231,7 +15285,7 @@ var TopShelf = function (_React$Component) {
       return _react2.default.createElement(
         TopShelfWrapper,
         { className: 'top-shelf' },
-        _react2.default.createElement(_BizPageMainHeader2.default, null),
+        _react2.default.createElement(_BizPageMainHeader2.default, { searchChange: this.FindSearchChange }),
         _react2.default.createElement(_BizPageContentDisplay2.default, { businessInfo: this.state.businessInfo })
       );
     }

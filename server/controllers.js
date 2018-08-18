@@ -8,17 +8,30 @@ const Generate = require('./randomNumberGenerators.js');
 
 const controller = {
   getRestaurant:(request, response) =>{
-   
-    Biz.findOne({
-      where:{
-        restaurant: request.params.restaurant
-      }
-    }).then(dataByRestaurant =>{
-      response.status(200).send(dataByRestaurant)
-    }).catch(err =>{
-      console.log(err);
-      response.status(500).json({error:err});
-    });
+   if(!request.params.city) {
+     Biz.findOne({
+       where:{
+         restaurant: request.params.restaurant
+       }
+     }).then(dataByRestaurant =>{
+       response.status(200).send(dataByRestaurant)
+     }).catch(err =>{
+       console.log(err);
+       response.status(500).json({error:err});
+     });
+    } else {
+       Biz.findOne({
+         where:{
+           restaurant: request.params.restaurant,
+           city: request.params.city
+         }
+       }).then(dataByRestaurant =>{
+         response.status(200).send(dataByRestaurant)
+       }).catch(err =>{
+         console.log(err);
+         response.status(500).json({error:err});
+       });
+   }
   }
 }
 
