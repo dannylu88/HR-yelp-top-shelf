@@ -71,7 +71,7 @@ class TopShelf extends React.Component {
             name: biz.restaurant,
             claimed: biz.claimed,
             rating: biz.rating,
-            review_count: biz.review_count,
+            //review_count: biz.review_count,
             price: biz.price,
             category: biz.category,
             address: address,
@@ -95,7 +95,7 @@ class TopShelf extends React.Component {
 
   FetchBusinessData() {
     //here is where to get data from db
-    axios.get('/main/biz/voluptatem porro facere')
+    axios.get('/main/biz/vel error suscipit')
       .then((response) => {
         console.log(response.data)
         if (response.data) {

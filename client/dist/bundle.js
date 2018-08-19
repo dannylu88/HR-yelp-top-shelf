@@ -13235,7 +13235,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  width: 996px;\n  margin: 0 auto;\n  \n'], ['\n  width: 996px;\n  margin: 0 auto;\n  \n']);
+var _templateObject = _taggedTemplateLiteral(['\n  width: 996px;\n  margin: 0 auto;\n'], ['\n  width: 996px;\n  margin: 0 auto;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -14405,34 +14405,34 @@ function ContentDisplayHeader(props) {
 
     switch (rating) {
       case '0':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/0.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/extra_large_0.png';
+        break;
+      case '1':
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/extra_large_1.png';
         break;
       case '1.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/1.png';
-        break;
-      case '1.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/1_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_1_half.png';
         break;
       case '2':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/2.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_2.png';
         break;
       case '2.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/2_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_2_half.png';
         break;
       case '3':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/3.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_3.png';
         break;
       case '3.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/3_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_3_half.png';
         break;
       case '4':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/4.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_4.png';
         break;
       case '4.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/4_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_4_half.png';
         break;
       case '5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/5.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_5.png';
         break;
     }
 
@@ -14461,7 +14461,7 @@ function ContentDisplayHeader(props) {
           props.claimed && _react2.default.createElement(
             ClaimedContainer,
             { className: 'claimed-tag-container' },
-            _react2.default.createElement(ClaimedIcon, { src: 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/claimedCheck.png' }),
+            _react2.default.createElement(ClaimedIcon, { src: 'https://s3-us-west-1.amazonaws.com/yelp-star-img/claimedCheck.png' }),
             'Claimed'
           )
         ),
@@ -15050,7 +15050,7 @@ function BPMH_SearchBar(props) {
             { className: 'find-title' },
             'Find'
           ),
-          _react2.default.createElement(Input, { name: 'find-input', placeholder: 'auto repair, burgers, spas...', onChange: props.findInputChange })
+          _react2.default.createElement(Input, { name: 'find-input', placeholder: 'Restaurant names, auto repair, spas...', onChange: props.findInputChange })
         ),
         _react2.default.createElement(
           NearBarWrapper,
@@ -15060,7 +15060,7 @@ function BPMH_SearchBar(props) {
             { className: 'near-title' },
             'Near'
           ),
-          _react2.default.createElement(Input, { name: 'near-input', placeholder: 'Current Location', onChange: props.nearInputChange })
+          _react2.default.createElement(Input, { name: 'near-input', placeholder: 'Current Location / City Name...', onChange: props.nearInputChange })
         ),
         _react2.default.createElement(
           SearchButton,
@@ -15218,7 +15218,7 @@ var TopShelf = function (_React$Component) {
               name: biz.restaurant,
               claimed: biz.claimed,
               rating: biz.rating,
-              review_count: biz.review_count,
+              //review_count: biz.review_count,
               price: biz.price,
               category: biz.category,
               address: address,
@@ -15247,7 +15247,7 @@ var TopShelf = function (_React$Component) {
       var _this3 = this;
 
       //here is where to get data from db
-      axios.get('/main/biz/voluptatem porro facere').then(function (response) {
+      axios.get('/main/biz/vel error suscipit').then(function (response) {
         console.log(response.data);
         if (response.data) {
           var biz = response.data;

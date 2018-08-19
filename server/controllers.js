@@ -35,6 +35,8 @@ const controller = {
   }
 }
 
+//BELOW IS MONGODB CONTROLLER
+
 // const controller = {
 //   get: (req, res) => {
 //     console.log('controller.get was called!');

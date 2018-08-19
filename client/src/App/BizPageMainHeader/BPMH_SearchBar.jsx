@@ -143,11 +143,11 @@ function BPMH_SearchBar(props) {
         <SearchBarForm>
           <FindBarWrapper className="find-bar-wrapper">
             <FindNearTitle className="find-title">Find</FindNearTitle>
-            <Input name="find-input" placeholder="auto repair, burgers, spas..." onChange={props.findInputChange}/>
+            <Input name="find-input" placeholder="Restaurant names, auto repair, spas..." onChange={props.findInputChange}/>
           </FindBarWrapper>
           <NearBarWrapper className="near-bar-wrapper">
             <FindNearTitle className="near-title">Near</FindNearTitle>
-            <Input name="near-input" placeholder="Current Location" onChange={props.nearInputChange}/>
+            <Input name="near-input" placeholder="Current Location / City Name..." onChange={props.nearInputChange}/>
           </NearBarWrapper>
           <SearchButton className="navButton" type="submit" form="searchBarForm" onClick={props.searchBarSubmit}>
             <SearchButtonIcon src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/searchIcon.png"/>
