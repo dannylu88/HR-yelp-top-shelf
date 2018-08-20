@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
     "build": "webpack -w",
-    "data": "node ./seed/seedGen.js"
+    "data": "node ./seed/seedGen.js",
+    "docker":"node ./server/index.js"
   },
   "repository": {
     "type": "git",
