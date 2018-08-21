@@ -8,7 +8,7 @@
     "start": "nodemon server/index.js",
     "build": "webpack -w",
     "data": "node ./seed/seedGen.js",
-    "docker":"node ./server/index.js"
+    "docker": "node ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "faker": "^4.1.0",
     "helmet": "^3.12.1",
     "mongoose": "^5.2.4",
+    "newrelic": "^4.8.0",
     "path": "^0.12.7",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
