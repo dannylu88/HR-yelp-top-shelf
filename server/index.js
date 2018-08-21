@@ -5,12 +5,14 @@ const path = require('path');
 const parser = require('body-parser');
 const router = require('./router.js');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const server = express();
 const port = 3006;
 
 const models = require('../database');
 
+server.use(morgan('dev')); 
 server.use(cors());
 server.use(express.static(path.join(__dirname, '../client/dist')));
 server.use(parser.json());
