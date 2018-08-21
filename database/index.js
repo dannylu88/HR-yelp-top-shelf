@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
         
 // new Sequelize (config.databasename, config.username, config.password)
-const connection = new Sequelize('yelp', 'dannylu8', '12345' , {
+const connection = new Sequelize('yelp', 'postgres', 'example' , {
+  host:'db',
   dialect: 'postgres'
 });
 
