@@ -9,6 +9,7 @@ yarn-error.log*
 nodemon.json
 Img/
 *.csv
+newrelic.js
 
 # Runtime data
 pids
