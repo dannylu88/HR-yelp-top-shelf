@@ -38,7 +38,6 @@ const controller = {
     //let {id, restaurant, rating, price, category, street, city, state, zip, country, website, email, phone} = request.body
     console.log(request.body)
     Biz.create({
-      id:request.body.id,
       restaurant:request.body.restaurant,
       rating:request.body.rating,
       price:request.body.price,
