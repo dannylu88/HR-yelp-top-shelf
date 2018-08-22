@@ -1,0 +1,13 @@
+{
+"restaurant":"santouka",
+"rating": "3",
+"price": "3",
+"category":"fastfood",
+"street":"23 purple",
+"city":"irvine",
+"state":"california",
+"zip":"92620",
+"website":"http://santouka.com",
+"email":"santouka@vip.com",
+"phone":"949-111-1111"
+}
