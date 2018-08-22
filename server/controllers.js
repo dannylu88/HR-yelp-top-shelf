@@ -29,14 +29,15 @@ const controller = {
          response.status(200).send(dataByRestaurant)
        }).catch(err =>{
          console.log(err);
-         response.status(500).json({error:err});
+         response.status(500).send({error:err});
        });
    }
   },
 
   postRestaurant:(request, response) =>{
     //let {id, restaurant, rating, price, category, street, city, state, zip, country, website, email, phone} = request.body
-    RestaurantData.create({
+    console.log(request.body)
+    Biz.create({
       id:request.body.id,
       restaurant:request.body.restaurant,
       rating:request.body.rating,
