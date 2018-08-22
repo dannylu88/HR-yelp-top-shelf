@@ -32,8 +32,36 @@ const controller = {
          response.status(500).json({error:err});
        });
    }
+  },
+
+  postRestaurant:(request, response) =>{
+    //let {id, restaurant, rating, price, category, street, city, state, zip, country, website, email, phone} = request.body
+    RestaurantData.create({
+      id:request.body.id,
+      restaurant:request.body.restaurant,
+      rating:request.body.rating,
+      price:request.body.price,
+      category:request.body.category,
+      street:request.body.street,
+      city:request.body.city,
+      state:request.body.street,
+      zip:request.body.zip,
+      country:request.body.country,
+      website:request.body.website,
+      email:request.body.email,
+      phone:request.body.phone
+    })
+    .then(newRestaurant=>{
+       response.status(201).json({
+         message:'successfully post new restaurant',
+         added:newRestaurant
+       })
+    })
+    .catch(err => console.error(err));
   }
 }
+
+
 
 //BELOW IS MONGODB CONTROLLER
 
