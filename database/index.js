@@ -3,7 +3,8 @@ const Sequelize = require('sequelize')
 // new Sequelize (config.databasename, config.username, config.password)
 const connection = new Sequelize('yelp', 'dannylu8', '12345' , {
   //host:'db',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  logging:false
 });
 
 //for docker use, comment out these when running locally
