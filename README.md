@@ -6,3 +6,6 @@ cmd to copy csv file to db
 
 cmd to apachebench post route
 ab -p /Users/dannylu8/Desktop/Immersive/hr23/Practice/Backend-Cap/HR-yelp-top-shelf/post-benchmark.txt -T application/json -c 10 -n 1000 localhost:3006/main/biz/
+
+maintain index
+vacuum full analyze table_name;

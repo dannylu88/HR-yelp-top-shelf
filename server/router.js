@@ -5,7 +5,7 @@ const controller = require('./controllers.js');
 router.route('/biz/:restaurant/:city?')
   .get(controller.getRestaurant)
   //.post(controller.post)
-router.route('/biz')
+router.route('/biz/post')
   .post(controller.postRestaurant)
 
 // router.route('/fakeData')
