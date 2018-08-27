@@ -12,7 +12,7 @@ const server = express();
 const port = 9002;
 
 
-server.use(morgan('dev')); 
+//server.use(morgan('dev')); 
 
 server.use('/', express.static(path.join(__dirname, '../client/dist')));
 server.use('/main/biz/post',parser.json());
