@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
         
 // new Sequelize (config.databasename, config.username, config.password)
-const connection = new Sequelize('yelp', 'dannylu8', '12345' , {
-  //host:'db',
+const connection = new Sequelize('yelp0', 'dannylu8', 'operation8' , {
+  host:'yelp1.cszfpoljp8kc.us-west-1.rds.amazonaws.com',
+  port:5432,
   dialect: 'postgres',
   logging:false
 });

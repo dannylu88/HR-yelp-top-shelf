@@ -10,6 +10,8 @@ ab -p /Users/dannylu8/Desktop/Immersive/hr23/Practice/Backend-Cap/HR-yelp-top-sh
 maintain index
 vacuum full analyze table_name;
 
+alter table businesses add column restaurant varchar(100), add column rating INT, add column price varchar(10), add column category varchar(50);
+
 DEPLOY
 1. ssh into ec2
    1) chmod 400 yelp.pem     -> run this if pem is too open(security)
