@@ -218,34 +218,34 @@ function ContentDisplayHeader(props) {
 
     switch(rating) {
       case '0':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/0.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/extra_large_0.png';
+        break;
+      case '1':
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/extra_large_1.png';
         break;
       case '1.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/1.png';
-        break;
-      case '1.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/1_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_1_half.png';
         break;
       case '2':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/2.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_2.png';
         break;
       case '2.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/2_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_2_half.png';
         break;
       case '3':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/3.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_3.png';
         break;
       case '3.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/3_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_3_half.png';
         break;
       case '4':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/4.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_4.png';
         break;
       case '4.5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/4_half.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_4_half.png';
         break;
       case '5':
-        link = 'https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/stars/5.png';
+        link = 'https://s3-us-west-1.amazonaws.com/yelp-star-img/regular_5.png';
         break;
     }
 
@@ -270,7 +270,7 @@ function ContentDisplayHeader(props) {
 
             { props.claimed && (
               <ClaimedContainer className="claimed-tag-container">
-                <ClaimedIcon src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/claimedCheck.png"/>
+                <ClaimedIcon src="https://s3-us-west-1.amazonaws.com/yelp-star-img/claimedCheck.png"/>
                 Claimed
               </ClaimedContainer>
             )}
@@ -292,9 +292,9 @@ function ContentDisplayHeader(props) {
             </span>
             <Dot>.</Dot>
             <span className="biz-keywords">
-              <Keyword>Japanese</Keyword>,
-              <Keyword>Tapas/Small Plates</Keyword>,
-              <Keyword>Pubs</Keyword>
+              <Keyword>{props.category}</Keyword>,
+              <Keyword>{props.category}</Keyword>,
+              <Keyword>{props.category}</Keyword>
             </span>
             <Chiclet className="edit-chiclet">
               <EditIcon src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/pencil-edit-button.png"/>

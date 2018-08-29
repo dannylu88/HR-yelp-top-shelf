@@ -1,7 +1,27 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize')
+        
+// new Sequelize (config.databasename, config.username, config.password)
+const connection = new Sequelize('yelp0', 'dannylu8', 'operation8' , {
+  host:'yelp1.cszfpoljp8kc.us-west-1.rds.amazonaws.com',
+  port:5432,
+  dialect: 'postgres',
+  logging:false
+});
 
-mongoose.connect('mongodb://localhost/yelpBiz');
+//for docker use, comment out these when running locally
+// const connection = new Sequelize('yelp', 'postgres', 'example' , {
+//   host:'db',
+//   dialect: 'postgres'
+// });
 
-const db = mongoose.connection;
-db.on('error', error => console.log(('Cannot connect to database')));
-db.once('open', () => console.log('Connected to database!'));
+//testing connection
+connection
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+module.exports = connection;

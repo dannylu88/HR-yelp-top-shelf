@@ -22,6 +22,7 @@ class BizPageMainHeader extends React.Component {
     this.setState({
       findInput: e.target.value
     });
+    console.log(this.state.findInput)
   }
 
   handleNearInputChange(e) {
@@ -31,12 +32,15 @@ class BizPageMainHeader extends React.Component {
   }
 
   handleSearchBizSubmit(e) {
-    console.log('handleSearchBizSubmit was called!');
-    e.preventDefault();
+    // console.log('handleSearchBizSubmit was called!');
+    this.props.searchChange(this.state.findInput, this.state.nearInput);
+    // e.preventDefault();
+    // console.log(this.state.findInput)
+    // console.log(this.state.nearInput)
   }
 
   navHighlighter(e) {
-    console.log(e.target);
+    // console.log(e.target);
   }
 
   render() {

@@ -1,0 +1,26 @@
+cmd to copy csv file to db
+\copy businesses(restaurant,rating,price,category,street,city,state,zip,country,website,email,phone) FROM '/Users/dannylu8/Desktop/Immersive/hr23/Practice/Backend-Cap/HR-yelp-top-shelf/data-psql.csv' CSV HEADER;
+
+cmd to apachebench get route
+
+
+cmd to apachebench post route
+ab -p /Users/dannylu8/Desktop/Immersive/hr23/Practice/Backend-Cap/HR-yelp-top-shelf/post-benchmark.txt -T application/json -c 10 -n 1000 localhost:3006/main/biz/
+
+maintain index
+vacuum full analyze table_name;
+
+alter table businesses add column restaurant varchar(100), add column rating INT, add column price varchar(10), add column category varchar(50);
+
+DEPLOY
+EC2
+1. ssh into ec2
+   1) chmod 400 yelp.pem     -> run this if pem is too open(security)
+   2) ssh -i yelp.pem ubuntu@ec2-54-183-103-72.us-west-1.compute.amazonaws.com
+2. upload csv file into ec2
+   scp -i [path to pem file] [path to your file] ubuntu@[ec2url]:[destination path]  ->destination path can be just your newfoler name
+
+RDS
+1. ssh into RDS 
+   psql "host=yelp1.cszfpoljp8kc.us-west-1.rds.amazonaws.com port=5432 user=dannylu8 dbname=yelp0"
+   and then enter password when you setup db...

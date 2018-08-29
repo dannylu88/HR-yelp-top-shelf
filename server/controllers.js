@@ -1,83 +1,145 @@
-const axios = require('axios');
+const sequelize = require('sequelize').sequelize;
+
+const DataTypes = require('sequelize').DataTypes;
 const faker = require('faker');
-const Biz = require('../database/models.js');
+const Biz = require('../database/business.js').Business;
 const Generate = require('./randomNumberGenerators.js');
 
+
 const controller = {
-  get: (req, res) => {
-    console.log('controller.get was called!');
-
-    let business_name = req.query.name;
-
-    Biz.find({ name: business_name }, (error, business) => {
-      if (error) {
-        console.log(error);
-      }
-      else {
-        res.send(business);
-      }
-    });
+  getRestaurant:(request, response) =>{
+   if(!request.params.city) {
+     Biz.findOne({
+       where:{
+         restaurant: request.params.restaurant
+       }
+     }).then(dataByRestaurant =>{
+       response.status(200).send(dataByRestaurant)
+     }).catch(err =>{
+       console.log(err);
+       response.status(500).json({error:err});
+     });
+    } else {
+       Biz.findOne({
+         where:{
+           restaurant: request.params.restaurant,
+           city: request.params.city
+         }
+       }).then(dataByRestaurant =>{
+         response.status(200).send(dataByRestaurant)
+       }).catch(err =>{
+         console.log(err);
+         response.status(500).send({error:err});
+       });
+   }
   },
-  post: (req, res) => {
-    console.log('controller.post was called!');
-  },
-  postFakerData: (req ,res) => {
-    console.log('controller.postFakerData was called!');
 
-    new Biz({
-      id: "1d711308-4f4a-45eb-81a5-a02bcbf7b585",
-      alias: "Heaney, Armstronga and Schumm",
-      name: "Jacobson, Jaskolski and Kreiger",
-      claimed: true,
-      rating: 1.5,
-      review_count: 2047,
-      price: "1",
-      category: "Beauty",
-      address: {
-        street: "Pagac Path",
-        city: "Alenatown",
-        state: "Tennassee",
-        zip: "31829-0299",
-        country: "PS"
-      },
-      website: "https://gabe.info",
-      email: "Kathlyn80@gmail.com",
-      phone: "551.873.1003 x115"
-    }).save((error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
-
-    for (let i = 0; i < 100; i++) {
-      let business = new Biz({
-        id: faker.random.uuid(),
-        alias: faker.company.companyName(),
-        name: faker.company.companyName(),
-        claimed: true,
-        rating: Generate.rating(),
-        review_count: Generate.reviews(),
-        price: Generate.price(),
-        category: faker.commerce.department(),
-        address: {
-          street: faker.address.streetName(),
-          city: faker.address.city(),
-          state: faker.address.state(),
-          zip: faker.address.zipCode(),
-          country: faker.address.countryCode()
-        },
-        website: faker.internet.url(),
-        email: faker.internet.email(),
-        phone: faker.phone.phoneNumber()
-      });
-
-      business.save((error) => {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
+  postRestaurant:(request, response) =>{
+    //let {id, restaurant, rating, price, category, street, city, state, zip, country, website, email, phone} = request.body
+    console.log(request.body)
+    Biz.create({
+      restaurant:request.body.restaurant,
+      rating:request.body.rating,
+      price:request.body.price,
+      category:request.body.category,
+      street:request.body.street,
+      city:request.body.city,
+      state:request.body.street,
+      zip:request.body.zip,
+      country:request.body.country,
+      website:request.body.website,
+      email:request.body.email,
+      phone:request.body.phone
+    })
+    .then(newRestaurant=>{
+       response.status(201).json({
+         message:'successfully post new restaurant',
+         added:newRestaurant
+       })
+    })
+    .catch(err => console.error(err));
   }
 }
+
+
+
+//BELOW IS MONGODB CONTROLLER
+
+// const controller = {
+//   get: (req, res) => {
+//     console.log('controller.get was called!');
+
+//     let business_name = req.query.name;
+
+//     Biz.find({ name: business_name }, (error, business) => {
+//       if (error) {
+//         console.log(error);
+//       }
+//       else {
+//         res.send(business);
+//       }
+//     });
+//   },
+//   post: (req, res) => {
+//     console.log('controller.post was called!');
+//   },
+//   postFakerData: (req ,res) => {
+//     console.log('controller.postFakerData was called!');
+
+//     new Biz({
+//       id: "1d711308-4f4a-45eb-81a5-a02bcbf7b585",
+//       alias: "Heaney, Armstronga and Schumm",
+//       name: "Jacobson, Jaskolski and Kreiger",
+//       claimed: true,
+//       rating: 1.5,
+//       review_count: 2047,
+//       price: "1",
+//       category: "Beauty",
+//       address: {
+//         street: "Pagac Path",
+//         city: "Alenatown",
+//         state: "Tennassee",
+//         zip: "31829-0299",
+//         country: "PS"
+//       },
+//       website: "https://gabe.info",
+//       email: "Kathlyn80@gmail.com",
+//       phone: "551.873.1003 x115"
+//     }).save((error) => {
+//       if (error) {
+//         console.log(error);
+//       }
+//     });
+
+//     for (let i = 0; i < 100; i++) {
+//       let business = new Biz({
+//         id: faker.random.uuid(),
+//         alias: faker.company.companyName(),
+//         name: faker.company.companyName(),
+//         claimed: true,
+//         rating: Generate.rating(),
+//         review_count: Generate.reviews(),
+//         price: Generate.price(),
+//         category: faker.commerce.department(),
+//         address: {
+//           street: faker.address.streetName(),
+//           city: faker.address.city(),
+//           state: faker.address.state(),
+//           zip: faker.address.zipCode(),
+//           country: faker.address.countryCode()
+//         },
+//         website: faker.internet.url(),
+//         email: faker.internet.email(),
+//         phone: faker.phone.phoneNumber()
+//       });
+
+//       business.save((error) => {
+//         if (error) {
+//           console.log(error);
+//         }
+//       });
+//     }
+//   }
+// }
 
 module.exports = controller;

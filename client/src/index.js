@@ -16,13 +16,16 @@ class TopShelf extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      findInfo: {
+        findInput: '',
+        nearInput: ''
+      },
       businessInfo: {
         id: '',
-        alias: '',
         name: '',
-        claimed: false,
+        claimed: true,
         rating: 0,
-        review_count: 0,
+        review_count: 2,
         price: 0,
         category: '',
         address: {},
@@ -31,7 +34,7 @@ class TopShelf extends React.Component {
         phone: ''
       }
     }
-
+    this.FindSearchChange = this.FindSearchChange.bind(this);
     this.DataGen = this.DataGen.bind(this);
   }
 
@@ -40,51 +43,86 @@ class TopShelf extends React.Component {
     this.FetchBusinessData()
   }
 
-  FindSearchChange(e) {
+  FindSearchChange(findInput, nearInput) {
+    console.log('search changes');
+    console.log('state:', this.state);
+    this.setState({
+      findInfo: {
+        findInput,
+        nearInput
+      } 
+    });
+    axios.get(`/main/biz/${findInput}/${nearInput}`)
+    .then((response) => {
+      console.log(response.data)
+      if (response.data) {
+        let biz = response.data;
+        let address = {
+          street: biz.street,
+          zip: biz.zip,
+          state: biz.state,
+          city: biz.city,
+          country: biz.country
+        }
 
+        this.setState({
+          businessInfo: {
+            id: biz.id,
+            name: biz.restaurant,
+            claimed: biz.claimed,
+            rating: biz.rating,
+            //review_count: biz.review_count,
+            price: biz.price,
+            category: biz.category,
+            address: address,
+            website: biz.website,
+            email: biz.email,
+            phone: biz.phone
+          }
+        });
+      }
+    })
+    .catch(error => console.log(error));
   }
 
   DataGen() {
-    axios.post('/main/fakeData')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(error => console.log(error));
+    // axios.post('/main/fakeData')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => console.log(error));
   }
 
   FetchBusinessData() {
     //here is where to get data from db
-    axios.get('http://ec2-54-153-70-61.us-west-1.compute.amazonaws.com/main/biz', {
-        params: {
-          name: 'Jacobson, Jaskolski and Kreiger'
-        }
-      })
+    axios.get('/main/biz/vel error suscipit')
       .then((response) => {
-
-        if (response.data.length) {
-
-          let biz = response.data[0];
+        console.log(response.data)
+        if (response.data) {
+          let biz = response.data;
+          let address = {
+            street: biz.street,
+            zip: biz.zip,
+            state: biz.state,
+            city: biz.city,
+            country: biz.country
+          }
 
           this.setState({
             businessInfo: {
               id: biz.id,
-              alias: biz.alias,
-              name: biz.name,
+              name: biz.restaurant,
               claimed: biz.claimed,
               rating: biz.rating,
               review_count: biz.review_count,
               price: biz.price,
               category: biz.category,
-              address: biz.address,
+              address: address,
               website: biz.website,
               email: biz.email,
               phone: biz.phone
             }
           });
-        }
-        else {
-          this.DataGen();
-          this.FetchBusinessData();
         }
       })
       .catch(error => console.log(error));
@@ -93,7 +131,7 @@ class TopShelf extends React.Component {
   render() {
     return (
       <TopShelfWrapper className="top-shelf">
-        <BizPageMainHeader />
+        <BizPageMainHeader searchChange={this.FindSearchChange}/>
         <BizPageContentDisplay businessInfo={this.state.businessInfo} />
       </TopShelfWrapper>
     )
