@@ -23,4 +23,4 @@ EC2
 RDS
 1. ssh into RDS 
    psql "host=yelp1.cszfpoljp8kc.us-west-1.rds.amazonaws.com port=5432 user=dannylu8 dbname=yelp0"
-   and then enter password when you setup db
+   and then enter password when you setup db...
