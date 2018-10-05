@@ -14,7 +14,7 @@ const connection = new Sequelize('yelp0', 'dannylu8', 'operation8' , {
 //   dialect: 'postgres'
 // });
 
-//testing connection
+//testing connection....
 connection
   .authenticate()
   .then(() => {

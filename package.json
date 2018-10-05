@@ -9,12 +9,12 @@
     "build": "webpack -w",
     "data": "node ./seed/seedGen.js",
     "docker": "node ./server/index.js",
-    "node-0":"node server/index.js",
-    "node-1":"node server/index1.js",
-    "node-2":"node server/index2.js",
-    "node-3":"node server/index3.js",
-    "node-4":"node server/index4.js",
-    "node-5":"node server/index5.js"
+    "node-0": "node server/index.js",
+    "node-1": "node server/index1.js",
+    "node-2": "node server/index2.js",
+    "node-3": "node server/index3.js",
+    "node-4": "node server/index4.js",
+    "node-5": "node server/index5.js"
   },
   "repository": {
     "type": "git",
