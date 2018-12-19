@@ -9,6 +9,7 @@ yarn-error.log*
 nodemon.json
 Img/
 *.csv
+node_modules
 
 # Runtime data
 pids

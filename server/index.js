@@ -1,5 +1,6 @@
-const newrelic = require('newrelic');
+//const newrelic = require('newrelic');
 
+const tracer = require('dd-trace').init()
 const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
